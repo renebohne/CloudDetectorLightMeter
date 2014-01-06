@@ -26,7 +26,7 @@
 
 const float A = 21.0;//edit this value for the Frequency to magnitudes/arcSecond2 calculation, depending on your sensor!!!
 
-OneWire  ds(11);  // DS18B20 on Arduino pin 11
+OneWire  ds(10);  // DS18B20 on Arduino pin 10
 byte ds18b20_addr[8];
 
 
