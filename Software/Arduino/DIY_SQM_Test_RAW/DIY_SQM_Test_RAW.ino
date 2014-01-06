@@ -22,19 +22,35 @@
 #include <i2cmaster.h>
 
 
+#include <SPI.h>
+//get it here https://github.com/adafruit/SD
+#include <SD.h>
 
 
 const float A = 21.0;//edit this value for the Frequency to magnitudes/arcSecond2 calculation, depending on your sensor!!!
 
-OneWire  ds(10);  // DS18B20 on Arduino pin 10
+OneWire  ds(9);  // DS18B20 on Arduino pin 9
 byte ds18b20_addr[8];
 
+//SD card support
+File myFile;
+int SDCardReady = 0;
 
 
 void setup(void) 
 {
   Serial.begin(9600);
-
+  
+  pinMode(10, OUTPUT);     // SPI SS pin for SD card support
+    
+  if (!SD.begin(4)) {
+    SDCardReady =0;
+  }
+  else
+  {
+    SDCardReady = 1;
+  }
+  
   init_DS18B20();
   init_MLX90614();
 }
@@ -89,6 +105,44 @@ void loop(void)
   Serial.print(MLX90614_celsius);
   Serial.print(";");
   Serial.println(TSL237_Msqm);
+  
+  
+  if(SDCardReady == 1)//is a SD card available?
+  {
+    //write the data to the SD card
+    myFile = SD.open("test.txt", FILE_WRITE);
+    
+    // if the file opened okay, write to it:
+    if (myFile) {
+      myFile.print("DS18B20  Temperature:\t");
+      myFile.print(ds18b20_celsius);
+      myFile.println("\tCelsius");
+      myFile.print("MLX90614 Temperature:\t");
+      myFile.print(MLX90614_celsius);
+      myFile.println("\tCelsius");  
+      myFile.print("DELTA Temperature:\t");
+      myFile.print(delta_celsius);
+      myFile.println("\tCelsius");
+      myFile.print("TSL237 Light level:\t");
+      myFile.print(TSL237_Msqm);
+      myFile.println("\tMag/As2");
+      myFile.print("*");
+      myFile.print(ds18b20_celsius);
+      myFile.print(";");
+      myFile.print(MLX90614_celsius);
+      myFile.print(";");
+      myFile.println(TSL237_Msqm);  
+      myFile.println();  
+      // close the file:
+      myFile.close();
+      
+    } else {
+      // if the file didn't open, print an error:
+    }
+  }
+
+  
+  
 
   //delay(1000);
   delay(250);
