@@ -2247,9 +2247,9 @@ Standard 3-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <part name="U$2" library="SparkFun-Aesthetics" deviceset="5V" device=""/>
 <part name="TSL237" library="SparkFun-Connectors" deviceset="M03" device="LOCK_LONGPADS"/>
 <part name="U$3" library="SparkFun-Aesthetics" deviceset="5V" device=""/>
-<part name="R1" library="SparkFun-Passives" deviceset="RESISTOR" device="PTH-1/4W"/>
-<part name="R2" library="SparkFun-Passives" deviceset="RESISTOR" device="PTH-1/4W"/>
-<part name="R3" library="SparkFun-Passives" deviceset="RESISTOR" device="PTH-1/4W"/>
+<part name="R1" library="SparkFun-Passives" deviceset="RESISTOR" device="PTH-1/4W" value="4k7"/>
+<part name="R2" library="SparkFun-Passives" deviceset="RESISTOR" device="PTH-1/4W" value="4k7"/>
+<part name="R3" library="SparkFun-Passives" deviceset="RESISTOR" device="PTH-1/4W" value="4k7"/>
 <part name="C1" library="SparkFun-Passives" deviceset="CAP" device="PTH" value="100nF"/>
 <part name="C3" library="SparkFun-Passives" deviceset="CAP" device="PTH" value="100nF"/>
 <part name="JP1" library="SparkFun-Connectors" deviceset="M03" device="LOCK_LONGPADS"/>
